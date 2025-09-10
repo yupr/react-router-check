@@ -1,8 +1,22 @@
+/// <reference types="vitest" />
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  plugins: [
+    // Vitestでのテスト実行時だけ、問題を引き起こす React Router のViteプラグインを無効化
+    // https://github.com/remix-run/react-router/discussions/12655#discussioncomment-11720266
+    !process.env.VITEST && reactRouter(),
+    react(),
+    tailwindcss(),
+    tsconfigPaths(),
+  ],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./test/setup.ts",
+  },
 });
