@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import Test from "./test";
 
 describe("App Component", () => {
-  it("should render the component correctly", () => {
+  test("should render the component correctly", () => {
     render(<Test />);
 
     // 見出しが正しく表示されているか
@@ -14,7 +14,7 @@ describe("App Component", () => {
     expect(screen.getByText("Count: 0")).toBeInTheDocument();
   });
 
-  it("should increment the count when the button is clicked", async () => {
+  test("should increment the count when the button is clicked", async () => {
     const user = userEvent.setup();
     render(<Test />);
 
