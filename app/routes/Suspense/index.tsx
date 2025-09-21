@@ -1,46 +1,37 @@
-import { useEffect, useState } from "react";
+import { cache, Suspense, use } from "react";
+import type { User } from "~/routes/Suspense/type";
 
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-};
+export function clientLoader() {
+  console.log("Suspense loader");
+}
 
-export default function Suspense() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetch("https://api.example.com/user");
-        const data: User = await response.json();
-
-        setUser(data);
-      } catch (error) {
-        console.error("Failed to fetch user:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+export default function SuspensePage() {
+  const usersPromise = cache(fetchUsers)();
 
   return (
-    <div>
-      <h1>Suspense</h1>
-      {user ? (
-        <p>
-          User: {user.firstName} {user.lastName}
-        </p>
-      ) : (
-        <p>No user data</p>
-      )}
-    </div>
+    <>
+      <h1>Test</h1>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Users usersPromise={usersPromise} />
+      </Suspense>
+    </>
+  );
+}
+
+const Users = ({ usersPromise }: { usersPromise: Promise<User[]> }) => {
+  const users = use(usersPromise);
+
+  return (
+    <ul>
+      {users.map((user: User) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+function fetchUsers(): Promise<User[]> {
+  return fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
+    res.json()
   );
 }
