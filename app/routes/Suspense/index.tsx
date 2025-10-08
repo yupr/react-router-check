@@ -10,7 +10,7 @@ export default function SuspensePage() {
 
   return (
     <>
-      <h1>Test</h1>
+      <h1>ユーザー一覧</h1>
       <Suspense fallback={<div>Loading...</div>}>
         <Users usersPromise={usersPromise} />
       </Suspense>
