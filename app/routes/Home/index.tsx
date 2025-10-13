@@ -21,7 +21,7 @@ const Cards = [
     link: "/suspense",
     description: "suspenseの検証",
   },
-  { id: 2, title: "unkonwn", link: "/unknown" },
+  { id: 2, title: "Todo", link: "/todo", description: "GraphQLの検証" },
 ];
 
 export default function Home() {
