@@ -1,11 +1,11 @@
 import { cache, Suspense, use } from "react";
-import type { User } from "~/routes/Suspense/type";
+import type { User } from "~/routes/Users/type";
 
 export function clientLoader() {
   console.log("Suspense loader");
 }
 
-export default function SuspensePage() {
+export default function UserPage() {
   const usersPromise = cache(fetchUsers)();
 
   return (

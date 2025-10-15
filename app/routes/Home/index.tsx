@@ -17,8 +17,8 @@ export function meta({}: Route.MetaArgs) {
 const Cards = [
   {
     id: 1,
-    title: "Suspense",
-    link: "/suspense",
+    title: "Users",
+    link: "/users",
     description: "suspenseの検証",
   },
   { id: 2, title: "Todo", link: "/todo", description: "GraphQLの検証" },
