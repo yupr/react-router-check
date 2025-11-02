@@ -17,11 +17,22 @@ export function meta({}: Route.MetaArgs) {
 const Cards = [
   {
     id: 1,
-    title: "Users",
+    title: "ユーザー一覧を取得",
     link: "/users",
-    description: "suspenseの検証",
+    description: "react の Suspense の検証",
   },
-  { id: 2, title: "Todo", link: "/todo", description: "GraphQLの検証" },
+  {
+    id: 2,
+    title: "Todo App",
+    link: "/todo",
+    description: "GraphQLの学習のために作成したTodoアプリ",
+  },
+  {
+    id: 3,
+    title: "Chat App",
+    link: "/chat",
+    description: "websocketの学習のために作成したチャットアプリ",
+  },
 ];
 
 export default function Home() {
